@@ -1,9 +1,21 @@
 import Layout from "@/components/layout";
+import PokemonCard from "@/components/pokemon-card";
 
 const Homepage = () => {
   return (
-    <Layout centerX centerY>
-      <div className="container grow py-4 px-8">Hello World</div>
+    <Layout>
+      <div className="grid grid-flow-row auto-rows-max grid-cols-2 gap-3 p-6">
+        <PokemonCard />
+        <PokemonCard />
+        <PokemonCard />
+        <PokemonCard />
+        <PokemonCard />
+        <PokemonCard />
+        <PokemonCard />
+        <PokemonCard />
+        <PokemonCard />
+        <PokemonCard />
+      </div>
     </Layout>
   );
 };
