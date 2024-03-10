@@ -20,11 +20,24 @@ const Homepage = () => {
     fetchData();
   }, []);
 
+  const setImageURL = (url: string) => {
+    const pokeApiLink = url;
+    const id = pokeApiLink.split("/")[6];
+    const newLink = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${id}.svg`;
+    return newLink;
+  };
+
+ 
+
   return (
     <Layout>
       <div className="grid grid-flow-row auto-rows-max grid-cols-2 gap-3 p-6">
         {pokemonList.map((pokemon) => (
-          <PokemonCard key={pokemon.name} pokemon={pokemon} />
+          <PokemonCard
+            key={pokemon.name}
+            pokemon={pokemon}
+            image_url={setImageURL(pokemon.url)} // nanti props image digabungin ke props pokemon
+          />
         ))}
       </div>
     </Layout>

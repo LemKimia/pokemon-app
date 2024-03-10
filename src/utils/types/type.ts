@@ -1,5 +1,4 @@
 export interface IPokemon {
-  image: string | undefined;
   name: string;
   url: string;
 }
