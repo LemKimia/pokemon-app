@@ -7,5 +7,5 @@ export interface IResponse<TDatas> {
   count: number;
   next: string;
   previous: null | string ;
-  results: TDatas;
+  results: TDatas; // yess
 }
