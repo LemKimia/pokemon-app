@@ -3,6 +3,7 @@ import PokemonCard from "@/components/pokemon-card";
 import { getPokemon } from "@/utils/api-list/api";
 import { IPokemon } from "@/utils/types/type";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 const Homepage = () => {
   const [pokemonList, setPokemonList] = useState<IPokemon[]>([]);
@@ -13,7 +14,7 @@ const Homepage = () => {
         const response = await getPokemon();
         setPokemonList(response.results);
       } catch (error) {
-        console.error("Error fetching Pokémon data:", error);
+        toast((error as Error).message.toString());
       }
     };
 
@@ -26,8 +27,6 @@ const Homepage = () => {
     const newLink = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${id}.svg`;
     return newLink;
   };
-
- 
 
   return (
     <Layout>
