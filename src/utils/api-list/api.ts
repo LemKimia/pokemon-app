@@ -11,11 +11,17 @@ export const getPokemon = async (): Promise<IResponse<IPokemon[]>> => {
   }
 };
 
-export const getPokemonDetails = async (name: string) => {
+const setDetailURL = (url: string) => {
+  const pokeApiLink = url;
+  return pokeApiLink.split("/")[6];
+};
+
+export const getPokemonDetails = async (url: string) => {
   try {
-    const response = await axios.get(
-      `https://pokeapi.co/api/v2/pokemon/${name}`
-    );
+    const id = setDetailURL(url);
+    const newLink = `https://pokeapi.co/api/v2/pokemon/${id}`;
+    const response = await axios.get(newLink);
+
     return response.data as IDetail;
   } catch (error: any) {
     throw Error(error.response.data.message);
