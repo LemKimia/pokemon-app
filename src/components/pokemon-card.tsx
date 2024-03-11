@@ -8,7 +8,7 @@ interface PokemonCardProps {
 }
 
 const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon, image_url }) => {
-const { idOrName } = useParams<{ idOrName?: string }>();
+const { idOrName } = useParams<{ idOrName: string }>();
 
 
   return (
