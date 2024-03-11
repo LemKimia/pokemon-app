@@ -5,29 +5,55 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { IDetail } from "@/utils/types/type";
 
-const PokemonDetails = () => {
+interface PokemonDetailProps {
+  pokemonDetails: IDetail;
+}
+
+const PokemonDetail: React.FC<PokemonDetailProps> = ({ pokemonDetails }) => {
+
+  
   return (
     <div>
       <Card className="flex flex-col rounded-2xl border-4 border-black shadow-lg shadow-black dark:border-white">
         <CardHeader>
           <CardTitle className="overflow-hidden break-all rounded-full border border-black p-2 text-center text-l capitalize tracking-wide text-black dark:border-white bg-transparent">
-            Green Bro
+            {pokemonDetails.name}
           </CardTitle>
         </CardHeader>
         <CardContent className="flex h-full flex-col items-center justify-between p-0">
           <img
-            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg"
-            alt="pokemon-sprites"
+            src={pokemonDetails.sprites.other?.dream_world.front_default}
+            alt={pokemonDetails.name}
           />
         </CardContent>
         <CardFooter className="grid grid-flow-row auto-rows-max grid-cols-2 gap-4">
-          <p className="overflow-hidden break-all rounded-full border border-black p-2 text-center text-xs capitalize tracking-wide text-black dark:border-white bg-transparent">
-            Flying
-          </p>
-          <p className="overflow-hidden break-all rounded-full border border-black p-2 text-center text-xs capitalize tracking-wide text-white dark:border-white bg-emerald-300">
-            Water
-          </p>
+          {pokemonDetails.types.slice(0, 2).map((type, index) => (
+            <p
+              className="overflow-hidden break-all rounded-full border border-black p-2 text-center text-xs capitalize tracking-wide text-black dark:border-white bg-transparent"
+              key={index}
+            >
+              {type.type.name}
+            </p>
+          ))}
+          {pokemonDetails.types.slice(0, 2).map((type, index) => (
+            <p
+              className="overflow-hidden break-all rounded-full border border-black p-2 text-center text-xs capitalize tracking-wide text-black dark:border-white bg-transparent"
+              key={index}
+            >
+              {type.type.name}
+            </p>
+          ))}
+
+          {pokemonDetails.abilities.map((abilities, index) => (
+            <p
+              className="overflow-hidden break-all rounded-full border border-black p-2 text-center text-xs capitalize tracking-wide text-white dark:border-white bg-emerald-300"
+              key={index}
+            >
+              {abilities.ability.name}
+            </p>
+          ))}
         </CardFooter>
       </Card>
       <div className="grid grid-flow-row auto-rows-max grid-cols-2 gap-4 mt-5">
@@ -51,4 +77,4 @@ const PokemonDetails = () => {
   );
 };
 
-export default PokemonDetails;
+export default PokemonDetail;
