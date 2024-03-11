@@ -8,8 +8,7 @@ import { IDetail } from "@/utils/types/type";
 
 const Catch = () => {
   const [counter, setCounter] = useState(0);
-  const { id } = useParams<{ id: string }>();
-  //const [pokemonDetail, setPokemonDetail] = useState<IPokemon[]>([]);const [selectedPokemon, setSelectedPokemon] = useState<IPokemon | null>(null);
+  const { id } = useParams<{ id?: string }>();
   const [pokemonDetail, setPokemonDetail] = useState<IDetail[]>([]);
 
   const catchPokemon = (pokemonIdOrName: string) => {
@@ -42,13 +41,6 @@ const Catch = () => {
     fetchData();
   }, []);
 
-  // useEffect(() => {
-
-  //   if (pokemonList.length > 0) {
-  //     const randomIndex = Math.floor(Math.random() * pokemonList.length);
-  //     setSelectedPokemon(pokemonList[randomIndex]);
-  //   }
-  // }, [pokemonList]);
 
   const setImageURL = (id: string) => {
     const newLink = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${id}.svg`;
@@ -59,7 +51,9 @@ const Catch = () => {
     <div>
       {pokemonDetail.map((pokemonDetail) => (
         <Layout>
-          <div>{pokemonDetail && <img src={setImageURL(id)} alt="" />}</div>
+          <div>
+            {pokemonDetail && id && <img src={setImageURL(id)} alt="" />}
+          </div>
           <div className="grid justify-center">
             <Button
               className="self-center"
