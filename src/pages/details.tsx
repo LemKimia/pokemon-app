@@ -1,6 +1,6 @@
 import Layout from "@/components/layout";
 import { useEffect, useState } from "react";
-import { getPokemon, getPokemonDetails } from "@/utils/api-list/api";
+import { getPokemonDetails } from "@/utils/api-list/api";
 import { IDetail } from "@/utils/types/type";
 import { useParams } from "react-router-dom";
 import { toast } from "sonner";
@@ -13,8 +13,7 @@ const Details = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const pokemonList = await getPokemon();
-        const response = await getPokemonDetails(pokemonList.results[0].url!);
+        const response = await getPokemonDetails(idOrName);
         setPokemonDetail([response]);
       } catch (error) {
         toast((error as Error).message.toString());
@@ -23,8 +22,6 @@ const Details = () => {
 
     fetchData();
   }, [idOrName]);
-
-
 
   return (
     <Layout>
