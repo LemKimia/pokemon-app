@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { IPokemon } from "@/utils/types/type";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 interface PokemonCardProps {
   pokemon: IPokemon;
