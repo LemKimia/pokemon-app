@@ -1,10 +1,14 @@
-function getRandomBoolean() {
-  return Math.random() < 0.5; // Returns true approximately 50% of the time
+import Layout from '@/components/layout'
+
+
+const Catch = () => {
+  return (
+    <Layout>
+      <div>
+        
+      </div>
+    </Layout>
+  )
 }
 
-// Example usage:
-console.log(getRandomBoolean()); // Outputs either true or false randomly
-
-if (getRandomBoolean() === true) {
-} else {
-}
+export default Catch
