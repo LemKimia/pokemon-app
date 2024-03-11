@@ -13,7 +13,8 @@ const Details = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await getPokemonDetails(idOrName);
+        const url = `https://pokeapi.co/api/v2/pokemon/${idOrName}`;
+        const response = await getPokemonDetails(url);
         setPokemonDetail([response]);
       } catch (error) {
         toast((error as Error).message.toString());
