@@ -6,6 +6,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { IDetail } from "@/utils/types/type";
+import { Link } from "react-router-dom";
 
 interface PokemonDetailProps {
   pokemonDetails: IDetail;
@@ -69,9 +70,11 @@ const PokemonDetail: React.FC<PokemonDetailProps> = ({ pokemonDetails }) => {
         </Card>
       </div>
       <div className="flex flex-col justify-center rounded-2xl mt-5 border-4 border-black shadow-lg shadow-black dark:border-white bg-white">
-        <a className="self-center " href="">
-          Catch!
-        </a>
+        <Link to={"/pokemon-catch"}>
+          <a className="self-center " href="">
+            Catch!
+          </a>
+        </Link>
       </div>
     </div>
   );

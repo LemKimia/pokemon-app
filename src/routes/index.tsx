@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Homepage from "@/pages";
 import Details from "@/pages/details";
+import Catch from "@/pages/catch";
 
 const router = createBrowserRouter([
   {
@@ -11,6 +12,10 @@ const router = createBrowserRouter([
   {
     path: "/pokemon-details/:idOrName",
     element: <Details />,
+  },
+  {
+    path: "/pokemon-catch",
+    element: <Catch />,
   },
 ]);
 
