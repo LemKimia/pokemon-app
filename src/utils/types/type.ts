@@ -1,5 +1,4 @@
 
-
 export interface IDetail {
   abilities: Ability[];
   id: number;
