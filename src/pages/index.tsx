@@ -35,7 +35,7 @@ const Homepage = () => {
           <PokemonCard
             key={pokemon.name}
             pokemon={pokemon}
-            image_url={setImageURL(pokemon.url)} // nanti props image digabungin ke props pokemon
+            image_url={setImageURL(pokemon.url)} 
           />
         ))}
       </div>
