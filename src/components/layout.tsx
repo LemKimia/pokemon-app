@@ -22,9 +22,7 @@ const Layout = (props: Props) => {
         }`}
       >
         <Navbar />
-        <div className="w-full h-screen overflow-auto  py-4 px-8 flex flex-col">
-          {children}
-        </div>
+        <div className="h-auto w-full overflow-auto">{children}</div>
         <Footer />
       </div>
     </div>

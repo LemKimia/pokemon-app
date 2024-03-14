@@ -1,5 +1,6 @@
 import axios from "axios";
-import { IDetail, IPokemon, IResponse } from "../types/type";
+import { IDetail } from "../types/type";
+import { IPokemon, IResponse } from "../types/results";
 
 export const getPokemon = async (): Promise<IResponse<IPokemon[]>> => {
   try {
@@ -11,16 +12,11 @@ export const getPokemon = async (): Promise<IResponse<IPokemon[]>> => {
   }
 };
 
-const setDetailURL = (url: string) => {
-  const pokeApiLink = url;
-  return pokeApiLink.split("/")[6];
-};
 
-export const getPokemonDetails = async (url: string) => {
+export const getPokemonDetails = async (name: string) => {
   try {
-    const id = setDetailURL(url);
-    const newLink = `https://pokeapi.co/api/v2/pokemon/${id}`;
-    const response = await axios.get(newLink);
+    
+    const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
 
     return response.data as IDetail;
   } catch (error: any) {
