@@ -6,7 +6,7 @@ export const getPokemon = async (): Promise<IResponse<IPokemon[]>> => {
   try {
     const response = await axios.get(`https://pokeapi.co/api/v2/pokemon`);
 
-    return response.data as IResponse<IPokemon>;
+    return response.data as IResponse<IPokemon[]>;
   } catch (error: any) {
     throw Error(error.response.data.message);
   }
