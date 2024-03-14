@@ -1,7 +1,7 @@
 import Layout from "@/components/layout";
 import PokemonCard from "@/components/pokemon-card";
 import { getPokemon } from "@/utils/api-list/api";
-import { IPokemon } from "@/utils/types/type";
+import { IPokemon } from "@/utils/types/results";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
@@ -35,7 +35,7 @@ const Homepage = () => {
           <PokemonCard
             key={pokemon.name}
             pokemon={pokemon}
-            image_url={setImageURL(pokemon.url)} // nanti props image digabungin ke props pokemon
+            image_url={setImageURL(pokemon.url)} 
           />
         ))}
       </div>

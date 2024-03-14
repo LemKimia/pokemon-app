@@ -1,5 +1,6 @@
 import axios from "axios";
-import { IDetail, IPokemon, IResponse } from "../types/type";
+import { IDetail } from "../types/type";
+import { IPokemon, IResponse } from "../types/results";
 
 export const getPokemon = async (): Promise<IResponse<IPokemon[]>> => {
   try {

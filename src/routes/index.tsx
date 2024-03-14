@@ -10,11 +10,11 @@ const router = createBrowserRouter([
     element: <Homepage />,
   },
   {
-    path: "/pokemon-details/:idOrName",
+    path: "/pokemon-details/:name",
     element: <Details />,
   },
   {
-    path: "/pokemon-catch/:id",
+    path: "/pokemon-catch/:name",
     element: <Catch />,
   },
 ]);
