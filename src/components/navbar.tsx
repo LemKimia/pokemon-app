@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom";
 
-
 const Navbar = () => {
   return (
-    <div className="bg-background/95 sticky left-0 right-0 top-0 z-20 border-b-1 backdrop-blur">
-      <nav className="container bg-black flex h-20 items-center justify-center px-4">
+    <nav className="sticky top-0 z-50 w-full border-gray-200 bg-black px-2 py-2.5 sm:px-4">
+      <div className="container mx-auto flex items-center justify-center">
         <Link to="/">
           <img
             className="size-16"
@@ -12,9 +11,9 @@ const Navbar = () => {
             alt="pokedex-logo"
           />
         </Link>
-      </nav>
-    </div>
+      </div>
+    </nav>
   );
-}
+};
 
-export default Navbar
+export default Navbar;

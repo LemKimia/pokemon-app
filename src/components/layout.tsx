@@ -14,9 +14,7 @@ const Layout = (props: Props) => {
     <div className="flex justify-center bg-slate-900">
       <div className="layout-container min-w-full max-w-full bg-gray-400 md:min-w-[480px] md:max-w-[480px]">
         <Navbar />
-        <div className="w-full h-screen overflow-auto  py-4 px-8 flex flex-col">
-          {children}
-        </div>
+        <div className="h-auto w-full overflow-auto">{children}</div>
         <Footer />
       </div>
     </div>

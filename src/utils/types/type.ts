@@ -1,11 +1,9 @@
-
 export interface IDetail {
   abilities: Ability[];
   id: number;
   moves: Move[];
   name: string;
   sprites: Sprites;
-  stats: Stat[];
   types: Type[];
 }
 
@@ -18,10 +16,6 @@ export interface Ability {
 export interface Move {
   move: Species;
 }
-export interface Species {
-  name: string;
-  url: string;
-}
 
 export interface Sprites {
   other?: Other;
@@ -32,15 +26,14 @@ export interface Other {
 }
 
 export interface DreamWorld {
-    front_default: string;
-    front_female:  null;
-}
-export interface Stat {
-  base_stat: number;
-  effort: number;
-  stat: Species;
+  front_default: string;
+  front_female: null;
 }
 export interface Type {
   slot: number;
   type: Species;
+}
+export interface Species {
+  name: string;
+  url: string;
 }
