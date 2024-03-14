@@ -1,11 +1,12 @@
-import { Key } from "react";
+
 
 export interface IDetail {
-  alias: Key | null | undefined;
   abilities: Ability[];
   id: number;
   moves: Move[];
   name: string;
+  url?: string;
+  alias?: string;
   sprites: Sprites;
   types: Type[];
 }
