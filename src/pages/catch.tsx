@@ -7,7 +7,10 @@ import { useParams } from "react-router-dom";
 import { toast } from "sonner";
 import { IDetail } from "@/utils/types/type";
 
-
+interface Props {
+  alias: string;
+  // Add other properties if needed
+}
 
 const Catch = () => {
   const params = useParams();
@@ -40,7 +43,7 @@ const Catch = () => {
 
   const submitCaughtPokemon = () => {
     const getFromLocal = JSON.parse(localStorage.getItem("myPokemons") || "[]");
-    const searchDupe = getFromLocal.find((x) => x.alias === alias);
+    const searchDupe = getFromLocal.find((x: Props) => x.alias === alias);
 
     if (searchDupe) {
       alert(`Alias ${alias} is already exist!`);
