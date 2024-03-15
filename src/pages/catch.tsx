@@ -17,6 +17,7 @@ const Catch = () => {
   const [pokemonDetail, setPokemonDetail] = useState<IDetail>();
   const [showDialog, setShowDialog] = useState(false);
   const [alias, setAlias] = useState<string>("");
+  const [loading, setLoading] = useState(true);
 
   const dreamWorldImage = pokemonDetail?.sprites.other?.dream_world;
   const imageUrl =
@@ -24,9 +25,11 @@ const Catch = () => {
 
   useEffect(() => {
     async function fetchData() {
+      setLoading(true);
       try {
         const response = await getPokemonDetails(params.name!);
 
+        setLoading(false);
         setPokemonDetail(response);
       } catch (error) {
         toast((error as Error).message.toString());
@@ -34,7 +37,9 @@ const Catch = () => {
     }
 
     fetchData();
-  }, []);
+  }, [params.name!]);
+
+  if (loading) return "Loading ...";
 
   const catchPokemon = (name: string | undefined) => {
     if (Math.random() < 0.5) {
@@ -58,7 +63,7 @@ const Catch = () => {
 
       setShowDialog(false);
       navigate("/");
-      console.log(navigate)
+      console.log(navigate);
     }
   };
 

@@ -7,21 +7,25 @@ import { toast } from "sonner";
 
 const Details = () => {
   const [pokemonDetail, setPokemonDetail] = useState<IDetail>();
+  const [loading, setLoading] = useState(true);
   const params = useParams();
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    async function fetchData() {
+      setLoading(true);
+      try {
+        const response = await getPokemonDetails(params.name!);
 
-  async function fetchData() {
-    try {
-      const response = await getPokemonDetails(params.name!);
-
-      setPokemonDetail(response);
-    } catch (error) {
-      toast((error as Error).message.toString());
+        setLoading(false);
+        setPokemonDetail(response);
+      } catch (error) {
+        toast((error as Error).message.toString());
+      }
     }
-  }
+    fetchData();
+  }, [params.name!]);
+
+  if (loading) return "Loading ...";
 
   return (
     <Layout>
