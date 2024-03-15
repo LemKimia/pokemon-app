@@ -1,4 +1,5 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
+import { useLoaderData } from "react-router-dom";
 
 import Navbar from "./navbar";
 import Footer from "./footer";
@@ -10,9 +11,15 @@ interface Props {
 
 const Layout = (props: Props) => {
   const { children } = props;
+
   const location = useLocation();
+  const loader = useLoaderData()
 
   const isBattlePage = location.pathname.startsWith("/pokemon-catch");
+
+  useEffect (() => {
+    document.title = loader as string
+  }, [])
 
   return (
     <div className="flex justify-center bg-gray-800">
