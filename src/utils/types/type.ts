@@ -31,7 +31,6 @@ export interface Other {
 
 export interface DreamWorld {
   front_default: string;
-  front_female: null;
 }
 export interface Type {
   slot: number;

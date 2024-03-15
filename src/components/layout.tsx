@@ -12,17 +12,17 @@ const Layout = (props: Props) => {
   const { children } = props;
   const location = useLocation();
 
-  const isBattlePage = location.pathname === "/pokemon-catch";
+  const isBattlePage = location.pathname.startsWith("/pokemon-catch");
 
   return (
-    <div className="flex justify-center bg-slate-900">
+    <div className="flex justify-center bg-gray-800">
       <div
-        className={`layout-container min-w-full max-w-full  md:min-w-[480px] md:max-w-[480px] ${
-          isBattlePage ? "bg-battle-image" : "bg-gray-400 bg-cover"
+        className={`layout-container min-w-full max-w-full md:min-w-[480px] md:max-w-[480px] ${
+          isBattlePage ? "bg-battle-image bg-cover" : "bg-gray-100"
         }`}
       >
         <Navbar />
-        <div className="h-auto w-full overflow-auto">{children}</div>
+        <div className="h-full w-full overflow-auto">{children}</div>
         <Footer />
       </div>
     </div>

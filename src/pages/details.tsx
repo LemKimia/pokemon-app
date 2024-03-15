@@ -7,25 +7,29 @@ import { toast } from "sonner";
 
 const Details = () => {
   const [pokemonDetail, setPokemonDetail] = useState<IDetail>();
+  const [loading, setLoading] = useState(true);
   const params = useParams();
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    async function fetchData() {
+      setLoading(true);
+      try {
+        const response = await getPokemonDetails(params.name!);
 
-  async function fetchData() {
-    try {
-      const response = await getPokemonDetails(params.name!);
-
-      setPokemonDetail(response);
-    } catch (error) {
-      toast((error as Error).message.toString());
+        setLoading(false);
+        setPokemonDetail(response);
+      } catch (error) {
+        toast((error as Error).message.toString());
+      }
     }
-  }
+    fetchData();
+  }, [params.name!]);
+
+  if (loading) return "Loading ...";
 
   return (
     <Layout>
-      <div className="grid h-full grid-flow-row auto-rows-max grid-cols-2">
+      <div className="grid h-full grid-flow-row auto-rows-max grid-cols-2 p-6">
         <div className="rounded-2xl border col-span-2 border-black shadow-lg shadow-black m-3 p-5">
           <div className="flex flex-col justify-center overflow-hidden break-all text-center capitalize tracking-wide text-black gap-2">
             <span className="text-2xl uppercase">{pokemonDetail?.name}</span>
