@@ -15,10 +15,10 @@ const Layout = (props: Props) => {
   const isBattlePage = location.pathname.startsWith("/pokemon-catch");
 
   return (
-    <div className="flex justify-center bg-slate-900">
+    <div className="flex justify-center bg-gray-800">
       <div
         className={`layout-container min-w-full max-w-full md:min-w-[480px] md:max-w-[480px] ${
-          isBattlePage ? "bg-battle-image" : "bg-neutral-800 bg-cover"
+          isBattlePage ? "bg-battle-image bg-cover" : "bg-gray-100"
         }`}
       >
         <Navbar />
