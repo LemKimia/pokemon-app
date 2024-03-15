@@ -57,7 +57,7 @@ const Catch = () => {
       localStorage.setItem("myPokemons", JSON.stringify(getFromLocal));
 
       setShowDialog(false);
-      navigate(-1);
+      navigate("/");
       console.log(navigate)
     }
   };
