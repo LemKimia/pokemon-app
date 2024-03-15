@@ -9,18 +9,30 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Homepage />,
+    loader: () => {
+      return "Minidex - Your Mini Pokédex";
+    },
   },
   {
     path: "/pokemon-details/:name",
     element: <Details />,
+    loader: () => {
+      return "Pokemon Detail - Minidex";
+    },
   },
   {
     path: "/pokemon-catch/:name",
     element: <Catch />,
+    loader: () => {
+      return "Catch 'em All - Minidex";
+    },
   },
   {
     path: "/my-pokemon",
     element: <MyPokemon />,
+    loader: () => {
+      return "My Pokemon - Minidex";
+    },
   },
 ]);
 
