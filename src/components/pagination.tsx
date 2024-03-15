@@ -1,7 +1,12 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "./ui/button";
 
-const Pagination = ({ gotoNextPage, gotoPreviousPage }) => {
+interface Props {
+  gotoNextPage: (() => void) | null;
+  gotoPreviousPage: (() => void) | null;
+}
+
+const Pagination: React.FC<Props>  = ({ gotoNextPage, gotoPreviousPage }) => {
   return (
     <div className="flex flex-row justify-center">
       {gotoPreviousPage && (
