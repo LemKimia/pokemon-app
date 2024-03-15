@@ -21,6 +21,7 @@ const Homepage = () => {
       console.log(loading);
       try {
         const response = await getPokemon(currentPageURL);
+        
         setLoading(false);
         setPokemonList(response.results);
         setNextPageURL(response.next);

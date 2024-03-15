@@ -7,12 +7,16 @@ import { useEffect, useState } from "react";
 
 const MyPokemon = () => {
   const [myPokemonList, setMyPokemonList] = useState<IDetail[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     const caughtPokemon = JSON.parse(localStorage.getItem("myPokemons") || "[]");
     setMyPokemonList(caughtPokemon);
+    setLoading(false);
   }, []);
 
+   if (loading) return "Loading ...";
 
   return (
     <Layout>
