@@ -5,7 +5,7 @@ export interface IDetail {
   id: number;
   moves: Move[];
   name: string;
-  url: string;
+  url?: string;
   alias?: string;
   sprites: Sprites;
   types: Type[];
@@ -33,7 +33,8 @@ export interface DreamWorld {
   front_default: string;
 }
 export interface Type {
-  
+  slot: number;
+  type: Species;
 }
 export interface Species {
   name: string;
