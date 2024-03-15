@@ -25,7 +25,7 @@ const Details = () => {
 
   return (
     <Layout>
-      <div className="grid h-full grid-flow-row auto-rows-max grid-cols-2">
+      <div className="grid h-full grid-flow-row auto-rows-max grid-cols-2 p-6">
         <div className="rounded-2xl border col-span-2 border-black shadow-lg shadow-black m-3 p-5">
           <div className="flex flex-col justify-center overflow-hidden break-all text-center capitalize tracking-wide text-black gap-2">
             <span className="text-2xl uppercase">{pokemonDetail?.name}</span>

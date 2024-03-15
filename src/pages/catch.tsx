@@ -1,22 +1,26 @@
 import Layout from "@/components/layout";
-import { Button } from "@/components/ui/button";
 import CatchDialog from "@/components/catch-dialog";
 import { getPokemonDetails } from "@/utils/api-list/api";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { IDetail } from "@/utils/types/type";
 
 interface Props {
   alias: string;
-  // Add other properties if needed
+  url: string;
 }
 
 const Catch = () => {
   const params = useParams();
+  const navigate = useNavigate();
   const [pokemonDetail, setPokemonDetail] = useState<IDetail>();
   const [showDialog, setShowDialog] = useState(false);
-   const [alias, setAlias] = useState<string>("");
+  const [alias, setAlias] = useState<string>("");
+
+  const dreamWorldImage = pokemonDetail?.sprites.other?.dream_world;
+  const imageUrl =
+    typeof dreamWorldImage === "string" ? dreamWorldImage : undefined;
 
   useEffect(() => {
     async function fetchData() {
@@ -53,19 +57,46 @@ const Catch = () => {
       localStorage.setItem("myPokemons", JSON.stringify(getFromLocal));
 
       setShowDialog(false);
+      navigate(-1);
+      console.log(navigate)
     }
   };
 
-
   return (
     <Layout>
-      <div className="grid justify-center">
-        <Button
-          className="self-center"
-          onClick={() => catchPokemon(pokemonDetail?.name)}
-        >
-          Catch Pokemon
-        </Button>
+      <div className="grid h-full w-full grid-flow-col grid-rows-2">
+        <div className="grid place-content-between justify-self-center">
+          <div className="rounded-2xl border border-black shadow-lg shadow-black m-3 p-5 bg-lime-700">
+            <p className="text-center font-arcade text-s tracking-wide text-white ">
+              Wild {pokemonDetail?.name} appeared!
+            </p>
+            <img src={imageUrl} alt="" />
+          </div>
+        </div>
+        <div className="grid auto-rows-max grid-cols-2 self-end">
+          <div className="rounded-2xl border border-black shadow-lg shadow-black m-3 p-5 bg-amber-500">
+            <p className="text-left font-arcade text-s tracking-wide text-white">
+              What will
+            </p>
+            <p className="text-left font-arcade text-sm tracking-wide text-white">
+              you do?
+            </p>
+          </div>
+          <div className="grid auto-rows-max grid-cols-2 rounded-2xl border border-black shadow-lg shadow-black m-3 p-5 bg-sky-500">
+            <button
+              className="text-left font-arcade text-s tracking-wide text-white"
+              onClick={() => catchPokemon(pokemonDetail?.name)}
+            >
+              Catch
+            </button>
+            <Link
+              to="/"
+              className="text-left font-arcade text-s tracking-wide text-white"
+            >
+              Run
+            </Link>
+          </div>
+        </div>
       </div>
       <CatchDialog show={showDialog}>
         <div className="mb-5">

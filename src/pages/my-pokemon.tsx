@@ -19,7 +19,7 @@ const MyPokemon = () => {
       <div className="grid grid-flow-row auto-rows-max grid-cols-2 gap-3 p-6">
         {myPokemonList.map((pokemon) => (
           <MyPokemonCard
-            key={pokemon.name}
+            key={pokemon.alias}
             pokemon={pokemon}
             image_url={pokemon.sprites.other?.dream_world.front_default}
           />
