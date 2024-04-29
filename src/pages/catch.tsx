@@ -15,14 +15,11 @@ const Catch = () => {
   const params = useParams();
   const navigate = useNavigate();
   const [pokemonDetail, setPokemonDetail] = useState<IDetail>();
+  const [pokemonImage, setPokemonImage] = useState("")
   const [showDialog, setShowDialog] = useState(false);
   const [alias, setAlias] = useState<string>("");
   const [loading, setLoading] = useState(true);
-
-  const dreamWorldImage = pokemonDetail?.sprites.other?.dream_world;
-  const imageUrl =
-    typeof dreamWorldImage === "string" ? dreamWorldImage : undefined;
-
+  
   useEffect(() => {
     async function fetchData() {
       setLoading(true);
@@ -31,13 +28,16 @@ const Catch = () => {
 
         setLoading(false);
         setPokemonDetail(response);
+        
+        setPokemonImage(response.sprites.other?.dream_world.front_default)
+        console.log(pokemonImage);
       } catch (error) {
         toast((error as Error).message.toString());
       }
     }
 
     fetchData();
-  }, [params.name!]);
+  }, [params.name, pokemonImage]);
 
   if (loading) return "Loading ...";
 
@@ -46,7 +46,7 @@ const Catch = () => {
       toast(`You Caught ${name} !`);
       setShowDialog(true);
     } else {
-      toast("You missed! Womp Womp");
+      toast("You missed!");
     }
   };
 
@@ -75,7 +75,7 @@ const Catch = () => {
             <p className="text-center font-arcade text-s tracking-wide text-white ">
               Wild {pokemonDetail?.name} appeared!
             </p>
-            <img src={imageUrl} alt="" />
+            <img src={pokemonImage} alt="" />
           </div>
         </div>
         <div className="grid auto-rows-max grid-cols-2 self-end">

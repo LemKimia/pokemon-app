@@ -5,7 +5,7 @@ export interface IDetail {
   id: number;
   moves: Move[];
   name: string;
-  url?: string;
+  url: string;
   alias?: string;
   sprites: Sprites;
   types: Type[];
@@ -22,7 +22,7 @@ export interface Move {
 }
 
 export interface Sprites {
-  other?: Other;
+  other: Other;
 }
 
 export interface Other {
