@@ -12,19 +12,20 @@ const PokemonCard = (props: Props) => {
 
   return (
     <div className="flex h-full flex-col rounded-2xl border-4 border-black shadow-lg shadow-black">
-      <div className="flex h-full flex-col items-center justify-between">
-        <Link to={`/pokemon-details/${pokemon.name}`}>
-          <div className="flex h-full w-full items-center justify-center">
+      <div className="flex h-full flex-col ">
+        <div className="flex h-full w-full items-center justify-center">
+          <Link to={`/pokemon-details/${pokemon.name}`}>
             <img
-              className="h-auto w-auto"
               src={image_url}
               alt={pokemon.name}
             />
-          </div>
-        </Link>
-        <p className="w-full rounded-b-lg bg-black py-2 text-center font-arcade text-xs font-bold uppercase tracking-widest text-white dark:rounded-b-xl">
-          {pokemon.name}
-        </p>
+          </Link>
+        </div>
+        <div className="w-full">
+          <p className="rounded-b-lg bg-black py-2 text-center font-arcade text-xs font-bold uppercase tracking-widest text-white dark:rounded-b-xl">
+            {pokemon.name}
+          </p>
+        </div>
       </div>
     </div>
   );

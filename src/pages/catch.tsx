@@ -70,11 +70,13 @@ const Catch = () => {
   return (
     <Layout>
       <div className="grid h-full w-full grid-flow-col grid-rows-2">
-        <div className="grid place-content-between justify-self-center">
-          <div className="rounded-2xl border border-black shadow-lg shadow-black m-3 p-5 bg-lime-700">
+        <div className="grid justify-self-center">
+          <div className="place-self-center p-5 rounded-2xl border border-black shadow-lg shadow-black bg-lime-700 ">
             <p className="text-center font-arcade text-s tracking-wide text-white ">
               Wild {pokemonDetail?.name} appeared!
             </p>
+          </div>
+          <div className="place-self-center">
             <img src={pokemonImage} alt="" />
           </div>
         </div>
