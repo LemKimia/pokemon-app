@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 
+
 const Navbar = () => {
   return (
     <nav className="sticky top-0 z-50 w-full border-gray-200 bg-red-900 ">
