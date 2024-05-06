@@ -55,7 +55,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://ibb.co/bK9C74s )
+[![Project Screenshot](https://i.postimg.cc/5tB0GqP5/Screenshot-2024-04-27-190523.png)](https://postimg.cc/gw0mLRbr)
 
 Minidex is a mini pokedex or a mini pokemon database created as a project for my Bootcamp in Alterra Academy. It uses public pokemon api and tailwinds css as styling. it features pokemon list with pagination, pokemon detail, pokemon battle or catch with your caught pokemon list. Explore the vast world of pokemon, and Go catch em ALL!
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
