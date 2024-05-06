@@ -6,4 +6,4 @@ A Solo Project from ALTA-FE Bootcamp
 // V 1.2 Deployment //
 
 V 2.0 Final Product Deployment --- 15/03/2024
-https://pokemon-app-iota-pink.vercel.app/
+https://minidex-pokemon.vercel.app/
