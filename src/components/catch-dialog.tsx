@@ -1,24 +1,23 @@
-
-
 interface Props {
-  children: React.ReactNode;
-  show: boolean;
+    children: React.ReactNode;
+    show: boolean;
 }
 
 const CatchDialog = (props: Props) => {
-  const { children, show } = props;
+    const {children, show} = props;
 
-  if (show) {
-    return (
-      <div className="fixed inset-y-0 z-50 flex h-full min-w-full max-w-full items-center justify-center bg-black/50 md:min-w-[480px] md:max-w-[480px]">
-        <div className="w-1/2 rounded-xl border-2 border-black bg-white p-5 ">
-          {children}
-        </div>
-      </div>
-    );
-  } else {
-    return null;
-  }
+    if (show) {
+        return (
+            <div
+                className="fixed inset-y-0 z-50 flex h-full min-w-full max-w-full items-center justify-center bg-black/50 md:min-w-[480px] md:max-w-[480px]">
+                <div className="w-1/2 rounded-xl border-2 border-black bg-white p-5 ">
+                    {children}
+                </div>
+            </div>
+        );
+    } else {
+        return null;
+    }
 };
 
 export default CatchDialog;
