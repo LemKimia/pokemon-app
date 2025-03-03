@@ -3,7 +3,7 @@ import { IDetail } from "@/utils/types/type.ts";
 import { useParams } from "react-router-dom";
 import { getPokemonDetails } from "@/utils/api-list/api.ts";
 import { toast } from "sonner";
-import PokemonDetails from "@/pages/details.tsx";
+import PokemonDetails from "@/pages/pokemon-details.tsx";
 
 const PokemonDetailsContainer = () => {
   const [pokemonDetail, setPokemonDetail] = useState<IDetail>();
