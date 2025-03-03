@@ -1,38 +1,32 @@
 import Homepage from "@/pages";
 import { useEffect, useState } from "react";
 import { IPokemon } from "@/utils/types/results.ts";
-import { getPokemon } from "@/utils/api-list/api.ts";
-import { toast } from "sonner";
+import { usePokemonList } from "@/utils/api-list/query.ts";
+import { DEFAULT_URL } from "@/masterdata/constant.ts";
 
 const HomePageContainer = () => {
   const [pokemonList, setPokemonList] = useState<IPokemon[]>([]);
   const [search, setSearch] = useState("");
-  const [currentPageURL, setCurrentPageURL] = useState(
-    "https://pokeapi.co/api/v2/pokemon",
-  );
+  const [currentPageURL, setCurrentPageURL] = useState(DEFAULT_URL);
   const [nextPageURL, setNextPageURL] = useState("");
   const [previousPageURL, setPreviousPageURL] = useState("");
-  const [loading, setLoading] = useState(true);
+
+  const {
+    data: pokemonData,
+    isError: errorFetchingPokemon,
+    isPending: isFetchingPokemon,
+  } = usePokemonList(currentPageURL);
 
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const response = await getPokemon(currentPageURL);
+    console.log("pokemon data is:", pokemonData);
+    if (pokemonData) {
+      setPokemonList(pokemonData.results);
+      setNextPageURL(pokemonData.next);
+      if (pokemonData.previous) setPreviousPageURL(pokemonData.previous);
+    }
+  }, [pokemonData]);
 
-        setLoading(false);
-        setPokemonList(response.results);
-        setNextPageURL(response.next);
-        setPreviousPageURL(response.previous!);
-      } catch (error) {
-        toast((error as Error).message.toString());
-      }
-    };
-
-    fetchData();
-  }, [currentPageURL]);
-
-  if (loading) return "Loading ...";
+  if (isFetchingPokemon) return "Loading ...";
 
   function gotoNextPage() {
     setCurrentPageURL(nextPageURL);
@@ -61,6 +55,7 @@ const HomePageContainer = () => {
       setImageURL={setImageURL}
       handleChange={handleChange}
       search={search}
+      errorFetchingPokemon={errorFetchingPokemon}
     />
   );
 };

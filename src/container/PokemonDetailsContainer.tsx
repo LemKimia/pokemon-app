@@ -1,32 +1,23 @@
 import { useEffect, useState } from "react";
 import { IDetail } from "@/utils/types/type.ts";
 import { useParams } from "react-router-dom";
-import { getPokemonDetails } from "@/utils/api-list/api.ts";
-import { toast } from "sonner";
 import PokemonDetails from "@/pages/pokemon-details.tsx";
+import { usePokemonDetails } from "@/utils/api-list/query.ts";
 
 const PokemonDetailsContainer = () => {
   const [pokemonDetail, setPokemonDetail] = useState<IDetail>();
-  const [loading, setLoading] = useState(true);
   const params = useParams();
 
+  const { data: pokemonDetails, isPending: isFetchingDetails } =
+    usePokemonDetails(params.name || "");
+
   useEffect(() => {
-    async function fetchData() {
-      setLoading(true);
-      try {
-        const response = await getPokemonDetails(params.name!);
-
-        setLoading(false);
-        setPokemonDetail(response);
-      } catch (error) {
-        toast((error as Error).message.toString());
-      }
+    if (pokemonDetails) {
+      setPokemonDetail(pokemonDetails);
     }
+  }, [pokemonDetails]);
 
-    fetchData();
-  }, [params.name!]);
-
-  if (loading) return "Loading ...";
+  if (isFetchingDetails) return "Loading ...";
   return <PokemonDetails pokemonDetail={pokemonDetail!} name={params.name!} />;
 };
 
