@@ -26,7 +26,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/LemKimia/pokemon-app">
-    <img src="public/icons8-pokeball-96.png" alt="Logo" width="80" height="80">
+    <img src="public/icons8-pokeball-96.png" alt="Logo" width="96" height="96">
   </a>
 
 <h3 align="center">Minidex</h3>
