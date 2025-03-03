@@ -13,7 +13,7 @@ const HomePageContainer = () => {
 
   const {
     data: pokemonData,
-    error: errorFetchingPokemon,
+    isError: errorFetchingPokemon,
     isPending: isFetchingPokemon,
   } = usePokemonList(currentPageURL);
 
@@ -55,6 +55,7 @@ const HomePageContainer = () => {
       setImageURL={setImageURL}
       handleChange={handleChange}
       search={search}
+      errorFetchingPokemon={errorFetchingPokemon}
     />
   );
 };

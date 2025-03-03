@@ -15,6 +15,7 @@ type HomepageProps = {
   setImageURL: (url: string) => string;
   handleChange: (value: string) => void;
   search: string;
+  errorFetchingPokemon: boolean;
 };
 
 const Homepage = ({
@@ -26,6 +27,7 @@ const Homepage = ({
   setImageURL,
   handleChange,
   search,
+  errorFetchingPokemon,
 }: HomepageProps) => {
   return (
     <Layout>
@@ -45,29 +47,38 @@ const Homepage = ({
         </div>
       </div>
       <div className="grid grid-cols-2 gap-3 p-6">
-        {pokemonList.filter((pokemon) => {
-          return search.toLowerCase() === ""
-            ? pokemon
-            : pokemon.name.toLowerCase().includes(search.toLowerCase());
-        }).length === 0 ? (
-          <div className="place-self-stretch">
-            <p>No Pokémon found. Check the next page</p>
-          </div>
+        {errorFetchingPokemon ? (
+          <p>Failed to fetch Pokémon</p>
         ) : (
-          pokemonList
-            .filter((pokemon) => {
+          <>
+            {pokemonList.filter((pokemon) => {
               return search.toLowerCase() === ""
                 ? pokemon
                 : pokemon.name.toLowerCase().includes(search.toLowerCase());
-            })
-            .map((pokemon) => (
-              <Link to={`/pokemon-details/${pokemon.name}`} key={pokemon.name}>
-                <PokemonCard
-                  pokemon={pokemon}
-                  image_url={setImageURL(pokemon.url)}
-                />
-              </Link>
-            ))
+            }).length === 0 ? (
+              <div className="place-self-stretch">
+                <p>No Pokémon found. Check the next page</p>
+              </div>
+            ) : (
+              pokemonList
+                .filter((pokemon) => {
+                  return search.toLowerCase() === ""
+                    ? pokemon
+                    : pokemon.name.toLowerCase().includes(search.toLowerCase());
+                })
+                .map((pokemon) => (
+                  <Link
+                    to={`/pokemon-details/${pokemon.name}`}
+                    key={pokemon.name}
+                  >
+                    <PokemonCard
+                      pokemon={pokemon}
+                      image_url={setImageURL(pokemon.url)}
+                    />
+                  </Link>
+                ))
+            )}
+          </>
         )}
       </div>
       <Pagination
