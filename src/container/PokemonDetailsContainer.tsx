@@ -1,24 +1,30 @@
-import { useEffect, useState } from "react";
-import { IDetail } from "@/utils/types/type.ts";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import PokemonDetails from "@/pages/pokemon-details.tsx";
 import { usePokemonDetails } from "@/utils/api-list/query.ts";
+import { usePokemonStore } from "@/utils/store.ts";
 
 const PokemonDetailsContainer = () => {
-  const [pokemonDetail, setPokemonDetail] = useState<IDetail>();
+  const pokemonDetails = usePokemonStore((state) => state.pokemonDetails);
+  const setPokemonDetails = usePokemonStore((state) => state.setPokemonDetails);
+
   const params = useParams();
 
-  const { data: pokemonDetails, isPending: isFetchingDetails } =
-    usePokemonDetails(params.name || "");
+  const {
+    data: pokemonData,
+    isPending: isFetchingDetails,
+    status: fetchingStatus,
+  } = usePokemonDetails(params.name || "");
 
   useEffect(() => {
-    if (pokemonDetails) {
-      setPokemonDetail(pokemonDetails);
+    if (pokemonData && !isFetchingDetails && fetchingStatus === "success") {
+      setPokemonDetails(pokemonData);
     }
-  }, [pokemonDetails]);
+  }, [pokemonData, isFetchingDetails]);
 
   if (isFetchingDetails) return "Loading ...";
-  return <PokemonDetails pokemonDetail={pokemonDetail!} name={params.name!} />;
+
+  return <PokemonDetails pokemonDetail={pokemonDetails} name={params.name!} />;
 };
 
 export default PokemonDetailsContainer;
