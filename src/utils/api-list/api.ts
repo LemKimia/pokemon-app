@@ -3,12 +3,12 @@ import { IDetail } from "../types/type";
 import { IPokemon, IResponse } from "../types/results";
 
 export const getPokemon = async (
-  currentPageURL: string
-): Promise<IResponse<IPokemon[]>> => {
+  currentPageURL: string,
+): Promise<IResponse<IPokemon>> => {
   try {
     const response = await axios.get(currentPageURL);
 
-    return response.data as IResponse<IPokemon[]>;
+    return response.data as IResponse<IPokemon>;
   } catch (error: any) {
     throw Error(error.response.data.message);
   }
@@ -17,7 +17,7 @@ export const getPokemon = async (
 export const getPokemonDetails = async (name: string) => {
   try {
     const response = await axios.get(
-      `https://pokeapi.co/api/v2/pokemon/${name}`
+      `https://pokeapi.co/api/v2/pokemon/${name}`,
     );
 
     return response.data as IDetail;
