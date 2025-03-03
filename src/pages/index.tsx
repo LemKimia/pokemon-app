@@ -47,10 +47,9 @@ const Homepage = () => {
   }
 
   const setImageURL = (url: string) => {
-    const pokeApiLink = url;
-    const id = pokeApiLink.split("/")[6];
-    const newLink = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${id}.svg`;
-    return newLink;
+    const id = url.split("/")[6];
+    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${id}.svg`;
+
   };
 
   const handleChange = (value: string) => {
