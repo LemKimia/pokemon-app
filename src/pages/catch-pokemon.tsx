@@ -1,72 +1,25 @@
 import Layout from "@/components/layout";
 import CatchDialog from "@/components/catch-dialog";
-import { getPokemonDetails } from "@/utils/api-list/api";
-import { useEffect, useState } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
-import { toast } from "sonner";
+import { Link } from "react-router-dom";
 import { IDetail } from "@/utils/types/type";
 
-interface Props {
-  alias: string;
-  url: string;
-}
+type CatchPokemonProps = {
+  pokemonDetail?: IDetail;
+  pokemonImage: string;
+  catchPokemon: (name: string | undefined) => void;
+  showDialog: boolean;
+  setAlias: (alias: string) => void;
+  submitCaughtPokemon: () => void;
+};
 
-const CatchPokemon = () => {
-  const params = useParams();
-  const navigate = useNavigate();
-  const [pokemonDetail, setPokemonDetail] = useState<IDetail>();
-  const [pokemonImage, setPokemonImage] = useState("");
-  const [showDialog, setShowDialog] = useState(false);
-  const [alias, setAlias] = useState<string>("");
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function fetchData() {
-      setLoading(true);
-      try {
-        const response = await getPokemonDetails(params.name!);
-
-        setLoading(false);
-        setPokemonDetail(response);
-
-        setPokemonImage(response.sprites.other?.dream_world.front_default);
-        console.log(pokemonImage);
-      } catch (error) {
-        toast((error as Error).message.toString());
-      }
-    }
-
-    fetchData();
-  }, [params.name, pokemonImage]);
-
-  if (loading) return "Loading ...";
-
-  const catchPokemon = (name: string | undefined) => {
-    if (Math.random() < 0.5) {
-      toast(`You Caught ${name} !`);
-      setShowDialog(true);
-    } else {
-      toast("You missed!");
-    }
-  };
-
-  const submitCaughtPokemon = () => {
-    const getFromLocal = JSON.parse(localStorage.getItem("myPokemons") || "[]");
-    const searchDupe = getFromLocal.find((x: Props) => x.alias === alias);
-
-    if (searchDupe) {
-      alert(`Alias ${alias} is already exist!`);
-    } else {
-      const dupe = { ...pokemonDetail, alias };
-      getFromLocal.push(dupe);
-      localStorage.setItem("myPokemons", JSON.stringify(getFromLocal));
-
-      setShowDialog(false);
-      navigate("/");
-      console.log(navigate);
-    }
-  };
-
+const CatchPokemon = ({
+  catchPokemon,
+  pokemonImage,
+  pokemonDetail,
+  submitCaughtPokemon,
+  setAlias,
+  showDialog,
+}: CatchPokemonProps) => {
   return (
     <Layout>
       <div className="grid h-full w-full grid-flow-col grid-rows-2">

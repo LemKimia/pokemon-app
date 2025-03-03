@@ -1,9 +1,9 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import CatchPokemon from "@/pages/catch-pokemon.tsx";
 import MyPokemon from "@/pages/my-pokemon";
 import HomePageContainer from "@/container/HomePageContainer.tsx";
 import PokemonDetailsContainer from "@/container/PokemonDetailsContainer.tsx";
+import CatchPokemonContainer from "@/container/CatchPokemonContainer.tsx";
 
 const router = createBrowserRouter([
   {
@@ -22,7 +22,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/pokemon-catch/:name",
-    element: <CatchPokemon />,
+    element: <CatchPokemonContainer />,
     loader: () => {
       return "CatchPokemon 'em All - Minidex";
     },
