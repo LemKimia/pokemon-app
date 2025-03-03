@@ -1,62 +1,32 @@
 import Layout from "@/components/layout";
 import Pagination from "@/components/pagination";
 import PokemonCard from "@/components/pokemon-card";
-import { getPokemon } from "@/utils/api-list/api";
 import { IPokemon } from "@/utils/types/results";
-import { useEffect, useState } from "react";
-import { toast } from "sonner";
 import { Link } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-const Homepage = () => {
-  const [pokemonList, setPokemonList] = useState<IPokemon[]>([]);
-  const [search, setSearch] = useState("");
-  const [currentPageURL, setCurrentPageURL] = useState(
-    "https://pokeapi.co/api/v2/pokemon"
-  );
-  const [nextPageURL, setNextPageURL] = useState("");
-  const [previousPageURL, setPreviousPageURL] = useState("");
-  const [loading, setLoading] = useState(true);
+type HomepageProps = {
+  pokemonList: IPokemon[];
+  nextPageURL: string;
+  previousPageURL: string;
+  gotoNextPage: () => void;
+  gotoPreviousPage: () => void;
+  setImageURL: (url: string) => string;
+  handleChange: (value: string) => void;
+  search: string;
+};
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const response = await getPokemon(currentPageURL);
-
-        setLoading(false);
-        setPokemonList(response.results);
-        setNextPageURL(response.next);
-        setPreviousPageURL(response.previous!);
-      } catch (error) {
-        toast((error as Error).message.toString());
-      }
-    };
-
-    fetchData();
-  }, [currentPageURL]);
-
-  if (loading) return "Loading ...";
-
-  function gotoNextPage() {
-    setCurrentPageURL(nextPageURL);
-  }
-  function gotoPreviousPage() {
-    setCurrentPageURL(previousPageURL);
-  }
-
-  const setImageURL = (url: string) => {
-    const id = url.split("/")[6];
-    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${id}.svg`;
-
-  };
-
-  const handleChange = (value: string) => {
-    setSearch(value);
-    console.log(search);
-  };
-
+const Homepage = ({
+  pokemonList,
+  gotoPreviousPage,
+  previousPageURL,
+  nextPageURL,
+  gotoNextPage,
+  setImageURL,
+  handleChange,
+  search,
+}: HomepageProps) => {
   return (
     <Layout>
       <div className="flex flex-col justify-center items-center w-full my-5">
