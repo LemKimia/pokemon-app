@@ -1,42 +1,37 @@
-
-
-export interface IDetail {
-  abilities: Ability[];
+export type IDetail = {
+  abilities: PokemonAbilities[];
+  alias?: string;
   id: number;
-  moves: Move[];
+  moves: PokemonMoves[];
   name: string;
   url: string;
-  alias?: string;
-  sprites: Sprites;
-  types: Type[];
-}
+  sprites: PokemonSprites;
+  types: PokemonTypes[];
+};
 
-export interface Ability {
-  ability: Species;
+export type PokemonAbilities = {
+  ability: NamedAPIResource;
   is_hidden: boolean;
   slot: number;
-}
+};
 
-export interface Move {
-  move: Species;
-}
+export type PokemonMoves = {
+  move: NamedAPIResource;
+};
 
-export interface Sprites {
-  other: Other;
-}
+export type PokemonSprites = {
+  other: {
+    dream_world: {
+      front_default: string;
+    };
+  };
+};
 
-export interface Other {
-  dream_world: DreamWorld;
-}
-
-export interface DreamWorld {
-  front_default: string;
-}
-export interface Type {
+export type PokemonTypes = {
   slot: number;
-  type: Species;
-}
-export interface Species {
+  type: NamedAPIResource;
+};
+export interface NamedAPIResource {
   name: string;
   url: string;
 }
