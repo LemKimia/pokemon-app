@@ -8,6 +8,9 @@ type PokemonStore = {
   pokemonList: IPokemon[];
   setPokemonList: (pokemonList: IPokemon[]) => void;
 
+  // TODO: buat array pokemon detail.
+  //  setiap detail pokemon yang di klik akan di simpan di array ini, sehingga tidak perlu request ke API lagi. kalau sudah lebih dari 6, hapus yang pertama.
+
   pokemonDetails: IDetail;
   setPokemonDetails: (pokemonDetails: IDetail) => void;
 

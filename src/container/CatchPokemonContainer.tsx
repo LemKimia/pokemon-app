@@ -1,8 +1,8 @@
-import CatchPokemon from "@/pages/catch-pokemon.tsx";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 import { toast } from "sonner";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { usePokemonStore } from "@/utils/store.ts";
+import CatchPokemon from "@/pages/catch-pokemon.tsx";
 
 const CatchPokemonContainer = () => {
   const [showDialog, setShowDialog] = useState(false);
@@ -20,6 +20,12 @@ const CatchPokemonContainer = () => {
     pokemonDetails.sprites.other?.dream_world.front_default;
 
   const catchPokemon = (name: string | undefined) => {
+    const isExist = capturedPokemon.find((x) => x.nickname === nickname);
+    if (isExist) {
+      alert(`Alias ${nickname} is already exist!`);
+      return;
+    }
+
     if (Math.random() < 0.5) {
       toast(`You Caught ${name} !`);
       setShowDialog(true);
@@ -29,15 +35,7 @@ const CatchPokemonContainer = () => {
   };
 
   const submitCaughtPokemon = () => {
-    const isExist = capturedPokemon.find((x) => x.nickname === nickname);
-
-    if (isExist) {
-      alert(`Alias ${nickname} is already exist!`);
-      return;
-    }
-
     addCapturedPokemon(nickname, pokemonDetails);
-
     setShowDialog(false);
     navigate("/");
   };
