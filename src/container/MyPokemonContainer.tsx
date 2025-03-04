@@ -1,23 +1,10 @@
 import MyPokemon from "@/pages/my-pokemon.tsx";
-import { useEffect, useState } from "react";
-import { IDetail } from "@/utils/types/type.ts";
+import { usePokemonStore } from "@/utils/store.ts";
 
 const MyPokemonContainer = () => {
-  const [myPokemonList, setMyPokemonList] = useState<IDetail[]>([]);
-  const [loading, setLoading] = useState(true);
+  const capturedPokemon = usePokemonStore((state) => state.capturedPokemon);
 
-  useEffect(() => {
-    setLoading(true);
-    const caughtPokemon = JSON.parse(
-      localStorage.getItem("myPokemons") || "[]",
-    );
-    setMyPokemonList(caughtPokemon);
-    setLoading(false);
-  }, []);
-
-  if (loading) return "Loading ...";
-
-  return <MyPokemon myPokemonList={myPokemonList} />;
+  return <MyPokemon myPokemonList={capturedPokemon} />;
 };
 
 export default MyPokemonContainer;
