@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { IDetail } from "@/utils/types/type";
 
-interface MyPokemonCardProps {
+type MyPokemonCardProps = {
   pokemon: IDetail;
   image_url?: string;
-}
+};
 
 const MyPokemonCard = ({ pokemon, image_url }: MyPokemonCardProps) => {
   return (
