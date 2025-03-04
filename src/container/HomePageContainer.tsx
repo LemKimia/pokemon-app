@@ -29,13 +29,13 @@ const HomePageContainer = () => {
 
   if (isFetchingPokemon) return "Loading ...";
 
-  function gotoNextPage() {
+  const gotoNextPage = () => {
     if (nextPageURL) setCurrentPageURL(nextPageURL);
-  }
+  };
 
-  function gotoPreviousPage() {
+  const gotoPreviousPage = () => {
     setCurrentPageURL(previousPageURL);
-  }
+  };
 
   const setImageURL = (url: string) => {
     const id = url.split("/")[6];
