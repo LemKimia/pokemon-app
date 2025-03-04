@@ -82,6 +82,17 @@ Project Deplotment Link: [Minidex](https://minidex-pokemon.vercel.app/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+## Version History
+
+| Version | Description                                | Date       |
+|--------|--------------------------------------------|------------|
+| 1.0.0  | Initial Release                           | 15/03/2024 |
+| 2.0.0  | Final Product Deployment                  | 15/03/2024 |
+| 2.1.0  | Updated Tailwind CSS configuration        | 03/04/2025 |
+| 2.2.0  | Migrated state management to Zustand      | 04/04/2025 |
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
