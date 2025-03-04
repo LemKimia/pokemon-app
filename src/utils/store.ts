@@ -14,7 +14,7 @@ type PokemonStore = {
   capturedPokemon: CapturedPokemon[];
   addCapturedPokemon: (
     nickname: string,
-    capturedPokemon: CapturedPokemon,
+    capturedPokemon: Omit<CapturedPokemon, "nickname">,
   ) => void;
   removeCapturedPokemon: (nickname: string) => void;
 };
@@ -35,7 +35,7 @@ export const usePokemonStore = create<PokemonStore>()(
             ...state.capturedPokemon,
             {
               ...capturedPokemon,
-              name: nickname,
+              nickname: nickname,
             },
           ],
         })),
