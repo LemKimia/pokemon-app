@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { IPokemon } from "@/utils/types/results.ts";
 import { CapturedPokemon, IDetail } from "@/utils/types/type.ts";
 import { initialPokemonDetail } from "@/masterdata/initial-data.ts";
-import { persist } from "zustand/middleware/persist";
+import { persist } from "zustand/middleware";
 
 type PokemonStore = {
   pokemonList: IPokemon[];
