@@ -1,13 +1,11 @@
 import { IPokemon } from "@/utils/types/results";
 
-type Props = {
+type PokemonCardProps = {
   pokemon: IPokemon;
   image_url: string;
 };
 
-const PokemonCard = (props: Props) => {
-  const { pokemon, image_url } = props;
-
+const PokemonCard = ({ pokemon, image_url }: PokemonCardProps) => {
   return (
     <div className="flex h-full flex-col rounded-2xl border-4 border-black shadow-lg shadow-black">
       <div className="flex h-full flex-col ">
