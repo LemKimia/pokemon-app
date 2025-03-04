@@ -7,7 +7,7 @@ import { usePokemonStore } from "@/utils/store";
 const HomePageContainer = () => {
   const [search, setSearch] = useState("");
   const [currentPageURL, setCurrentPageURL] = useState(DEFAULT_URL);
-  const [nextPageURL, setNextPageURL] = useState("");
+  const [nextPageURL, setNextPageURL] = useState<string | null>("");
   const [previousPageURL, setPreviousPageURL] = useState("");
 
   const pokemonList = usePokemonStore((state) => state.pokemonList);
@@ -30,7 +30,7 @@ const HomePageContainer = () => {
   if (isFetchingPokemon) return "Loading ...";
 
   function gotoNextPage() {
-    setCurrentPageURL(nextPageURL);
+    if (nextPageURL) setCurrentPageURL(nextPageURL);
   }
 
   function gotoPreviousPage() {

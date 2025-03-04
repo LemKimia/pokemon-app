@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 
 type HomepageProps = {
   pokemonList: IPokemon[];
-  nextPageURL: string;
+  nextPageURL: string | null;
   previousPageURL: string;
   gotoNextPage: () => void;
   gotoPreviousPage: () => void;
