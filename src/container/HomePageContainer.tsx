@@ -1,15 +1,17 @@
 import Homepage from "@/pages";
 import { useEffect, useState } from "react";
-import { IPokemon } from "@/utils/types/results.ts";
 import { usePokemonList } from "@/utils/api-list/query.ts";
 import { DEFAULT_URL } from "@/masterdata/constant.ts";
+import { usePokemonStore } from "@/utils/store";
 
 const HomePageContainer = () => {
-  const [pokemonList, setPokemonList] = useState<IPokemon[]>([]);
   const [search, setSearch] = useState("");
   const [currentPageURL, setCurrentPageURL] = useState(DEFAULT_URL);
-  const [nextPageURL, setNextPageURL] = useState("");
+  const [nextPageURL, setNextPageURL] = useState<string | null>("");
   const [previousPageURL, setPreviousPageURL] = useState("");
+
+  const pokemonList = usePokemonStore((state) => state.pokemonList);
+  const setPokemonList = usePokemonStore((state) => state.setPokemonList);
 
   const {
     data: pokemonData,
@@ -18,7 +20,6 @@ const HomePageContainer = () => {
   } = usePokemonList(currentPageURL);
 
   useEffect(() => {
-    console.log("pokemon data is:", pokemonData);
     if (pokemonData) {
       setPokemonList(pokemonData.results);
       setNextPageURL(pokemonData.next);
@@ -29,7 +30,7 @@ const HomePageContainer = () => {
   if (isFetchingPokemon) return "Loading ...";
 
   function gotoNextPage() {
-    setCurrentPageURL(nextPageURL);
+    if (nextPageURL) setCurrentPageURL(nextPageURL);
   }
 
   function gotoPreviousPage() {
