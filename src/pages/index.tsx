@@ -13,7 +13,7 @@ type HomepageProps = {
   gotoNextPage: () => void;
   gotoPreviousPage: () => void;
   setImageURL: (url: string) => string;
-  handleChange: (value: string) => void;
+  handleSearchPokemon: (value: string) => void;
   search: string;
   errorFetchingPokemon: boolean;
 };
@@ -25,7 +25,7 @@ const Homepage = ({
   nextPageURL,
   gotoNextPage,
   setImageURL,
-  handleChange,
+  handleSearchPokemon,
   search,
   errorFetchingPokemon,
 }: HomepageProps) => {
@@ -38,7 +38,7 @@ const Homepage = ({
               type="search"
               placeholder="Search"
               value={search}
-              onChange={(e) => handleChange(e.target.value)}
+              onChange={(search) => handleSearchPokemon(search.target.value)}
             />
             <Button variant="ghost" type="submit">
               Search

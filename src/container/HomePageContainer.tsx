@@ -1,8 +1,8 @@
 import Homepage from "@/pages";
 import { useEffect, useState } from "react";
-import { usePokemonList } from "@/utils/api-list/query.ts";
-import { DEFAULT_URL } from "@/masterdata/constant.ts";
 import { usePokemonStore } from "@/utils/store";
+import { DEFAULT_URL } from "@/masterdata/constant.ts";
+import { usePokemonList } from "@/utils/api-list/query.ts";
 
 const HomePageContainer = () => {
   const [search, setSearch] = useState("");
@@ -42,9 +42,8 @@ const HomePageContainer = () => {
     return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${id}.svg`;
   };
 
-  const handleChange = (value: string) => {
+  const handleSearchPokemon = (value: string) => {
     setSearch(value);
-    console.log(search);
   };
   return (
     <Homepage
@@ -54,7 +53,7 @@ const HomePageContainer = () => {
       previousPageURL={previousPageURL}
       gotoPreviousPage={gotoPreviousPage}
       setImageURL={setImageURL}
-      handleChange={handleChange}
+      handleSearchPokemon={handleSearchPokemon}
       search={search}
       errorFetchingPokemon={errorFetchingPokemon}
     />
