@@ -1,14 +1,12 @@
-import { IDetail } from "@/utils/types/type";
 import { Link } from "react-router-dom";
+import { IDetail } from "@/utils/types/type";
 
-interface Props {
+interface MyPokemonCardProps {
   pokemon: IDetail;
   image_url?: string;
 }
 
-const MyPokemonCard = (props: Props) => {
-  const { pokemon, image_url } = props;
-
+const MyPokemonCard = ({ pokemon, image_url }: MyPokemonCardProps) => {
   return (
     <div className="flex h-full flex-col rounded-2xl border-4 border-black shadow-lg shadow-black">
       <div className="flex h-full flex-col items-center justify-between">
