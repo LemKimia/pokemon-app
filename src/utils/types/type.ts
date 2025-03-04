@@ -9,6 +9,10 @@ export type IDetail = {
   types: PokemonTypes[];
 };
 
+export type CapturedPokemon = IDetail & {
+  nickname: string;
+};
+
 export type PokemonAbilities = {
   ability: NamedAPIResource;
   is_hidden: boolean;
