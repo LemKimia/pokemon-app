@@ -4,17 +4,18 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { usePokemonStore } from "@/utils/store.ts";
 
-type DupeProps = {
-  alias: string;
-  url: string;
-};
-
 const CatchPokemonContainer = () => {
   const [showDialog, setShowDialog] = useState(false);
-  const [alias, setAlias] = useState("");
+  const [nickname, setNickname] = useState("");
+
   const navigate = useNavigate();
 
   const pokemonDetails = usePokemonStore((state) => state.pokemonDetails);
+  const capturedPokemon = usePokemonStore((state) => state.capturedPokemon);
+  const addCapturedPokemon = usePokemonStore(
+    (state) => state.addCapturedPokemon,
+  );
+
   const pokemonImageUrl =
     pokemonDetails.sprites.other?.dream_world.front_default;
 
@@ -28,20 +29,17 @@ const CatchPokemonContainer = () => {
   };
 
   const submitCaughtPokemon = () => {
-    const getFromLocal = JSON.parse(localStorage.getItem("myPokemons") || "[]");
-    const searchDupe = getFromLocal.find((x: DupeProps) => x.alias === alias);
+    const isExist = capturedPokemon.find((x) => x.nickname === nickname);
 
-    if (searchDupe) {
-      alert(`Alias ${alias} is already exist!`);
-    } else {
-      const dupe = { ...pokemonDetails, alias };
-      getFromLocal.push(dupe);
-      localStorage.setItem("myPokemons", JSON.stringify(getFromLocal));
-
-      setShowDialog(false);
-      navigate("/");
-      console.log(navigate);
+    if (isExist) {
+      alert(`Alias ${nickname} is already exist!`);
+      return;
     }
+
+    addCapturedPokemon(nickname, pokemonDetails);
+
+    setShowDialog(false);
+    navigate("/");
   };
 
   return (
@@ -49,7 +47,7 @@ const CatchPokemonContainer = () => {
       catchPokemon={catchPokemon}
       pokemonDetail={pokemonDetails}
       pokemonImage={pokemonImageUrl}
-      setAlias={setAlias}
+      setAlias={setNickname}
       submitCaughtPokemon={submitCaughtPokemon}
       showDialog={showDialog}
     />
