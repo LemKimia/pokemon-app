@@ -1,9 +1,8 @@
 import CatchPokemon from "@/pages/catch-pokemon.tsx";
-import { useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { IDetail } from "@/utils/types/type.ts";
-import { getPokemonDetails } from "@/utils/api-list/api.ts";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { toast } from "sonner";
+import { usePokemonStore } from "@/utils/store.ts";
 
 type DupeProps = {
   alias: string;
@@ -11,34 +10,13 @@ type DupeProps = {
 };
 
 const CatchPokemonContainer = () => {
-  const params = useParams();
-  const navigate = useNavigate();
-  const [pokemonDetail, setPokemonDetail] = useState<IDetail>();
-  const [pokemonImage, setPokemonImage] = useState("");
   const [showDialog, setShowDialog] = useState(false);
-  const [alias, setAlias] = useState<string>("");
-  const [loading, setLoading] = useState(true);
+  const [alias, setAlias] = useState("");
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    async function fetchData() {
-      setLoading(true);
-      try {
-        const response = await getPokemonDetails(params.name!);
-
-        setLoading(false);
-        setPokemonDetail(response);
-
-        setPokemonImage(response.sprites.other?.dream_world.front_default);
-        console.log(pokemonImage);
-      } catch (error) {
-        toast((error as Error).message.toString());
-      }
-    }
-
-    fetchData();
-  }, [params.name, pokemonImage]);
-
-  if (loading) return "Loading ...";
+  const pokemonDetails = usePokemonStore((state) => state.pokemonDetails);
+  const pokemonImageUrl =
+    pokemonDetails.sprites.other?.dream_world.front_default;
 
   const catchPokemon = (name: string | undefined) => {
     if (Math.random() < 0.5) {
@@ -56,7 +34,7 @@ const CatchPokemonContainer = () => {
     if (searchDupe) {
       alert(`Alias ${alias} is already exist!`);
     } else {
-      const dupe = { ...pokemonDetail, alias };
+      const dupe = { ...pokemonDetails, alias };
       getFromLocal.push(dupe);
       localStorage.setItem("myPokemons", JSON.stringify(getFromLocal));
 
@@ -69,8 +47,8 @@ const CatchPokemonContainer = () => {
   return (
     <CatchPokemon
       catchPokemon={catchPokemon}
-      pokemonDetail={pokemonDetail}
-      pokemonImage={pokemonImage}
+      pokemonDetail={pokemonDetails}
+      pokemonImage={pokemonImageUrl}
       setAlias={setAlias}
       submitCaughtPokemon={submitCaughtPokemon}
       showDialog={showDialog}
