@@ -1,5 +1,5 @@
 import Layout from "@/components/layout";
-import Pagination from "@/components/pagination";
+import CustomPagination from "@/components/customPagination.tsx";
 import PokemonCard from "@/components/pokemon-card";
 import { IPokemon } from "@/utils/types/results";
 import { Link } from "react-router-dom";
@@ -81,7 +81,7 @@ const Homepage = ({
           </>
         )}
       </div>
-      <Pagination
+      <CustomPagination
         gotoNextPage={nextPageURL ? gotoNextPage : null}
         gotoPreviousPage={previousPageURL ? gotoPreviousPage : null}
       />
