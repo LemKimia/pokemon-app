@@ -30,17 +30,14 @@ const Homepage = ({
 }: HomepageProps) => {
   return (
     <Layout>
-      <div className="flex flex-col justify-center items-center w-full my-5">
-        <div className="flex w-1/2 max-w-sm items-center space-x-2">
-          <div className="flex w-full max-w-sm items-center space-x-2">
-            <Input
-              type="search"
-              placeholder="Search"
-              value={searchPokemon}
-              onChange={(search) => handleSearchPokemon(search.target.value)}
-            />
-          </div>
-        </div>
+      <div className="flex justify-center w-full my-5">
+        <Input
+          className="w-1/2"
+          type="search"
+          placeholder="Search"
+          value={searchPokemon}
+          onChange={(search) => handleSearchPokemon(search.target.value)}
+        />
       </div>
       <div className="grid grid-cols-2 gap-3 p-6">
         {errorFetchingPokemon ? (
