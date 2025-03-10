@@ -36,7 +36,7 @@ const HomePageContainer = () => {
     setSearchPokemon(value);
   };
 
-  const filteredPokemon = pokemonList.filter(
+  const filteredPokemonList = pokemonList.filter(
     (pokemon) => {
       return searchPokemon.toLowerCase() === ""
         ? pokemon
@@ -51,13 +51,13 @@ const HomePageContainer = () => {
       setNextPageURL(pokemonData.next);
       if (pokemonData.previous) setPreviousPageURL(pokemonData.previous);
     }
-  }, [pokemonData]);
+  }, [pokemonData, setPokemonList]);
 
   if (isFetchingPokemon) return "Loading ...";
 
   return (
     <Homepage
-      pokemonList={filteredPokemon}
+      pokemonList={filteredPokemonList}
       nextPageURL={nextPageURL}
       gotoNextPage={gotoNextPage}
       previousPageURL={previousPageURL}
