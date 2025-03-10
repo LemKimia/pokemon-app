@@ -4,7 +4,6 @@ import PokemonCard from "@/components/pokemon-card";
 import { IPokemon } from "@/utils/types/results";
 import { Link } from "react-router-dom";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 
 type HomepageProps = {
   pokemonList: IPokemon[];
@@ -40,9 +39,6 @@ const Homepage = ({
               value={searchPokemon}
               onChange={(search) => handleSearchPokemon(search.target.value)}
             />
-            <Button variant="ghost" type="submit">
-              Search
-            </Button>
           </div>
         </div>
       </div>
