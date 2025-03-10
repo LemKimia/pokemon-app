@@ -14,7 +14,7 @@ type HomepageProps = {
   gotoPreviousPage: () => void;
   setImageURL: (url: string) => string;
   handleSearchPokemon: (value: string) => void;
-  search: string;
+  searchPokemon: string;
   errorFetchingPokemon: boolean;
 };
 
@@ -26,7 +26,7 @@ const Homepage = ({
   gotoNextPage,
   setImageURL,
   handleSearchPokemon,
-  search,
+  searchPokemon,
   errorFetchingPokemon,
 }: HomepageProps) => {
   return (
@@ -37,7 +37,7 @@ const Homepage = ({
             <Input
               type="search"
               placeholder="Search"
-              value={search}
+              value={searchPokemon}
               onChange={(search) => handleSearchPokemon(search.target.value)}
             />
             <Button variant="ghost" type="submit">
@@ -52,9 +52,11 @@ const Homepage = ({
         ) : (
           <>
             {pokemonList.filter((pokemon) => {
-              return search.toLowerCase() === ""
+              return searchPokemon.toLowerCase() === ""
                 ? pokemon
-                : pokemon.name.toLowerCase().includes(search.toLowerCase());
+                : pokemon.name
+                    .toLowerCase()
+                    .includes(searchPokemon.toLowerCase());
             }).length === 0 ? (
               <div className="place-self-stretch">
                 <p>No Pokémon found. Check the next page</p>
@@ -62,9 +64,11 @@ const Homepage = ({
             ) : (
               pokemonList
                 .filter((pokemon) => {
-                  return search.toLowerCase() === ""
+                  return searchPokemon.toLowerCase() === ""
                     ? pokemon
-                    : pokemon.name.toLowerCase().includes(search.toLowerCase());
+                    : pokemon.name
+                        .toLowerCase()
+                        .includes(searchPokemon.toLowerCase());
                 })
                 .map((pokemon) => (
                   <Link

@@ -5,7 +5,7 @@ import { DEFAULT_URL } from "@/masterdata/constant.ts";
 import { usePokemonList } from "@/utils/api-list/query.ts";
 
 const HomePageContainer = () => {
-  const [search, setSearch] = useState("");
+  const [searchPokemon, setSearchPokemon] = useState("");
   const [currentPageURL, setCurrentPageURL] = useState(DEFAULT_URL);
   const [nextPageURL, setNextPageURL] = useState<string | null>("");
   const [previousPageURL, setPreviousPageURL] = useState("");
@@ -43,7 +43,7 @@ const HomePageContainer = () => {
   };
 
   const handleSearchPokemon = (value: string) => {
-    setSearch(value);
+    setSearchPokemon(value);
   };
   return (
     <Homepage
@@ -54,7 +54,7 @@ const HomePageContainer = () => {
       gotoPreviousPage={gotoPreviousPage}
       setImageURL={setImageURL}
       handleSearchPokemon={handleSearchPokemon}
-      search={search}
+      searchPokemon={searchPokemon}
       errorFetchingPokemon={errorFetchingPokemon}
     />
   );
