@@ -44,36 +44,22 @@ const Homepage = ({
           <p>Failed to fetch Pokémon</p>
         ) : (
           <>
-            {pokemonList.filter((pokemon) => {
-              return searchPokemon.toLowerCase() === ""
-                ? pokemon
-                : pokemon.name
-                    .toLowerCase()
-                    .includes(searchPokemon.toLowerCase());
-            }).length === 0 ? (
+            {pokemonList.length === 0 ? (
               <div className="place-self-stretch">
                 <p>No Pokémon found. Check the next page</p>
               </div>
             ) : (
-              pokemonList
-                .filter((pokemon) => {
-                  return searchPokemon.toLowerCase() === ""
-                    ? pokemon
-                    : pokemon.name
-                        .toLowerCase()
-                        .includes(searchPokemon.toLowerCase());
-                })
-                .map((pokemon) => (
-                  <Link
-                    to={`/pokemon-details/${pokemon.name}`}
-                    key={pokemon.name}
-                  >
-                    <PokemonCard
-                      pokemon={pokemon}
-                      image_url={setImageURL(pokemon.url)}
-                    />
-                  </Link>
-                ))
+              pokemonList.map((pokemon) => (
+                <Link
+                  to={`/pokemon-details/${pokemon.name}`}
+                  key={pokemon.name}
+                >
+                  <PokemonCard
+                    pokemon={pokemon}
+                    image_url={setImageURL(pokemon.url)}
+                  />
+                </Link>
+              ))
             )}
           </>
         )}
