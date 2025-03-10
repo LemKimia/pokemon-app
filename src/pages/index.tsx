@@ -32,9 +32,9 @@ const Homepage = ({
     <Layout>
       <div className="flex justify-center w-full my-5">
         <Input
-          className="w-1/2"
+          className="w-1/2 rounded-2 border-3 border-black shadow-sm shadow-black "
           type="search"
-          placeholder="Search"
+          placeholder="Find your pokemon..."
           value={searchPokemon}
           onChange={(search) => handleSearchPokemon(search.target.value)}
         />
