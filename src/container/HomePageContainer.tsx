@@ -22,16 +22,29 @@ const HomePageContainer = () => {
   const gotoNextPage = () => {
     if (nextPageURL) setCurrentPageURL(nextPageURL);
   };
+
   const gotoPreviousPage = () => {
     setCurrentPageURL(previousPageURL);
   };
+
   const setImageURL = (url: string) => {
     const id = url.split("/")[6];
     return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${id}.svg`;
   };
+
   const handleSearchPokemon = (value: string) => {
     setSearchPokemon(value);
   };
+
+  const filteredPokemon = pokemonList.filter(
+    (pokemon) => {
+      return searchPokemon.toLowerCase() === ""
+        ? pokemon
+        : pokemon.name.toLowerCase().includes(searchPokemon.toLowerCase());
+    },
+    [searchPokemon],
+  );
+
   useEffect(() => {
     if (pokemonData) {
       setPokemonList(pokemonData.results);
@@ -44,7 +57,7 @@ const HomePageContainer = () => {
 
   return (
     <Homepage
-      pokemonList={pokemonList}
+      pokemonList={filteredPokemon}
       nextPageURL={nextPageURL}
       gotoNextPage={gotoNextPage}
       previousPageURL={previousPageURL}
