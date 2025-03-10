@@ -5,7 +5,7 @@ import { DEFAULT_URL } from "@/masterdata/constant.ts";
 import { usePokemonList } from "@/utils/api-list/query.ts";
 
 const HomePageContainer = () => {
-  const [search, setSearch] = useState("");
+  const [searchPokemon, setSearchPokemon] = useState("");
   const [currentPageURL, setCurrentPageURL] = useState(DEFAULT_URL);
   const [nextPageURL, setNextPageURL] = useState<string | null>("");
   const [previousPageURL, setPreviousPageURL] = useState("");
@@ -18,16 +18,6 @@ const HomePageContainer = () => {
     isError: errorFetchingPokemon,
     isPending: isFetchingPokemon,
   } = usePokemonList(currentPageURL);
-
-  useEffect(() => {
-    if (pokemonData) {
-      setPokemonList(pokemonData.results);
-      setNextPageURL(pokemonData.next);
-      if (pokemonData.previous) setPreviousPageURL(pokemonData.previous);
-    }
-  }, [pokemonData]);
-
-  if (isFetchingPokemon) return "Loading ...";
 
   const gotoNextPage = () => {
     if (nextPageURL) setCurrentPageURL(nextPageURL);
@@ -43,18 +33,38 @@ const HomePageContainer = () => {
   };
 
   const handleSearchPokemon = (value: string) => {
-    setSearch(value);
+    setSearchPokemon(value);
   };
+
+  const filteredPokemonList = pokemonList.filter(
+    (pokemon) => {
+      return searchPokemon.toLowerCase() === ""
+        ? pokemon
+        : pokemon.name.toLowerCase().includes(searchPokemon.toLowerCase());
+    },
+    [searchPokemon],
+  );
+
+  useEffect(() => {
+    if (pokemonData) {
+      setPokemonList(pokemonData.results);
+      setNextPageURL(pokemonData.next);
+      if (pokemonData.previous) setPreviousPageURL(pokemonData.previous);
+    }
+  }, [pokemonData, setPokemonList]);
+
+  if (isFetchingPokemon) return "Loading ...";
+
   return (
     <Homepage
-      pokemonList={pokemonList}
+      pokemonList={filteredPokemonList}
       nextPageURL={nextPageURL}
       gotoNextPage={gotoNextPage}
       previousPageURL={previousPageURL}
       gotoPreviousPage={gotoPreviousPage}
       setImageURL={setImageURL}
       handleSearchPokemon={handleSearchPokemon}
-      search={search}
+      searchPokemon={searchPokemon}
       errorFetchingPokemon={errorFetchingPokemon}
     />
   );
