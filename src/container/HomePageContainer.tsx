@@ -19,6 +19,19 @@ const HomePageContainer = () => {
     isPending: isFetchingPokemon,
   } = usePokemonList(currentPageURL);
 
+  const gotoNextPage = () => {
+    if (nextPageURL) setCurrentPageURL(nextPageURL);
+  };
+  const gotoPreviousPage = () => {
+    setCurrentPageURL(previousPageURL);
+  };
+  const setImageURL = (url: string) => {
+    const id = url.split("/")[6];
+    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${id}.svg`;
+  };
+  const handleSearchPokemon = (value: string) => {
+    setSearchPokemon(value);
+  };
   useEffect(() => {
     if (pokemonData) {
       setPokemonList(pokemonData.results);
@@ -29,22 +42,6 @@ const HomePageContainer = () => {
 
   if (isFetchingPokemon) return "Loading ...";
 
-  const gotoNextPage = () => {
-    if (nextPageURL) setCurrentPageURL(nextPageURL);
-  };
-
-  const gotoPreviousPage = () => {
-    setCurrentPageURL(previousPageURL);
-  };
-
-  const setImageURL = (url: string) => {
-    const id = url.split("/")[6];
-    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${id}.svg`;
-  };
-
-  const handleSearchPokemon = (value: string) => {
-    setSearchPokemon(value);
-  };
   return (
     <Homepage
       pokemonList={pokemonList}
